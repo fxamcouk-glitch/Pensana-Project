@@ -233,9 +233,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text-muted);
+  scroll-margin-top: var(--topbar-offset);
 }
 .day:first-child { margin-top: 0; }
-.day { scroll-margin-top: var(--topbar-offset); }
 .article {
   display: grid;
   grid-template-columns: 12px 1fr auto;

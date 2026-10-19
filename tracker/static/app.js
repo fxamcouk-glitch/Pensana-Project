@@ -122,10 +122,11 @@ function renderTabs() {
         class: "tab",
         "aria-current": stock.symbol === state.symbol ? "true" : "false",
         title: stock.query,
+        "aria-label": `${stock.name} ${stock.symbol}${stock.unread ? `, ${stock.unread} unread` : ""}`,
         onclick: () => selectStock(stock.symbol),
       },
       `${stock.name} · ${stock.symbol}`,
-      stock.unread ? el("span", { class: "badge", title: `${stock.unread} unread` }, String(stock.unread)) : null)
+      stock.unread ? el("span", { class: "badge", "aria-hidden": "true" }, String(stock.unread)) : null)
     )
   );
 }
@@ -366,12 +367,12 @@ function renderArticle(article) {
   const actions = el("div", { class: "article-actions" },
     el("button", {
       type: "button", class: "icon-btn star", "aria-pressed": String(article.starred),
-      "aria-label": article.starred ? "Unstar" : "Star", title: article.starred ? "Unstar" : "Star",
+      "aria-label": "Star", title: article.starred ? "Unstar" : "Star",
       onclick: () => patch(article, { starred: !article.starred }),
     }, article.starred ? "★" : "☆"),
     el("button", {
       type: "button", class: "icon-btn", "aria-pressed": String(article.read),
-      "aria-label": article.read ? "Mark unread" : "Mark read", title: article.read ? "Mark unread" : "Mark read",
+      "aria-label": "Read", title: article.read ? "Mark unread" : "Mark read",
       onclick: () => patch(article, { read: !article.read }),
     }, article.read ? "○" : "✓"),
     el("button", {
