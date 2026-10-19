@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: stock-news-tracker
+    runtime: python
+    plan: free
+    buildCommand: "true"
+    startCommand: python3 -m tracker.app
+    healthCheckPath: /api/stocks
+    envVars:
+      - key: REFRESH_MINUTES
+        value: "15"

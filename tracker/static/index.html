@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Stock News Tracker</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1 class="brand">Stock News Tracker</h1>
+    <nav class="tabs" id="tabs" aria-label="Watchlist"></nav>
+    <div class="topbar-actions">
+      <button type="button" class="btn" id="add-stock">Add stock</button>
+      <button type="button" class="btn btn-primary" id="refresh">Refresh</button>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="banner" id="banner" role="alert" hidden></div>
+
+    <section class="panel price" id="price" aria-labelledby="price-name">
+      <div class="price-head">
+        <div>
+          <h2 class="price-name" id="price-name">—</h2>
+          <p class="muted" id="price-meta"></p>
+        </div>
+        <div class="price-figure">
+          <span class="price-value" id="price-value">—</span>
+          <span class="change" id="price-change"></span>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <svg id="chart" class="chart" role="group" aria-label="Price chart. News days are marked; select one to jump to its articles."></svg>
+        <div class="chart-tip" id="chart-tip" hidden></div>
+      </div>
+      <div class="price-foot">
+        <div class="segmented" id="range" role="group" aria-label="Chart range">
+          <button type="button" data-range="1mo">1M</button>
+          <button type="button" data-range="3mo">3M</button>
+          <button type="button" data-range="6mo">6M</button>
+          <button type="button" data-range="1y">1Y</button>
+        </div>
+        <p class="legend muted">
+          <span class="dot dot-news"></span> News
+          <span class="dot dot-rns"></span> RNS
+        </p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="articles-title">
+      <div class="toolbar">
+        <h2 class="section-title" id="articles-title">Articles <span class="muted" id="count"></span></h2>
+        <input type="search" class="input" id="search" placeholder="Search headlines, notes, sources" aria-label="Search">
+        <select class="input" id="kind" aria-label="Type">
+          <option value="">All types</option>
+          <option value="rns">RNS only</option>
+          <option value="news">News only</option>
+        </select>
+        <select class="input" id="status" aria-label="Status">
+          <option value="">All articles</option>
+          <option value="unread">Unread</option>
+          <option value="starred">Starred</option>
+          <option value="noted">With notes</option>
+        </select>
+        <select class="input" id="source" aria-label="Source">
+          <option value="">All sources</option>
+        </select>
+        <button type="button" class="btn" id="read-all">Mark all read</button>
+      </div>
+
+      <div id="list" class="list" aria-live="polite"></div>
+      <p class="state" id="state" role="status" hidden></p>
+      <button type="button" class="btn btn-block" id="more" hidden>Load more</button>
+    </section>
+
+    <p class="footnote muted" id="footnote"></p>
+  </main>
+
+  <dialog class="dialog" id="stock-dialog" aria-labelledby="stock-dialog-title">
+    <form method="dialog" id="stock-form" novalidate>
+      <h2 class="section-title" id="stock-dialog-title">Add stock</h2>
+      <label class="field">
+        <span>Ticker</span>
+        <input class="input" name="symbol" required placeholder="PRE.L" autocomplete="off">
+        <small class="muted">Yahoo Finance symbol. London listings end in .L</small>
+      </label>
+      <label class="field">
+        <span>Name</span>
+        <input class="input" name="name" placeholder="Pensana">
+      </label>
+      <label class="field">
+        <span>News search</span>
+        <input class="input" name="query" placeholder="Pensana rare earths">
+        <small class="muted">Searched on Google News. Defaults to the name.</small>
+      </label>
+      <p class="field-error" id="stock-error" role="alert" hidden></p>
+      <div class="dialog-actions">
+        <button type="button" class="btn" id="stock-cancel">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="stock-submit">Add stock</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/app.js"></script>
+</body>
+</html>
