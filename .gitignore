@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 *.db
 *.db-journal
+
+# Analysis derived from a private Telegram group: kept local, not published
+research_notes/Pensana Telegram group analysis/
+reports/Pensana Telegram group analysis.md
